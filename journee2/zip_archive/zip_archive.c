@@ -254,7 +254,7 @@ get_archive_stats(PG_FUNCTION_ARGS)
          errmsg("function returning record called in context that cannot accept type record")));
 
   /* open ZIP archive */
-  ziparchive = zip_open(destination, ZIP_CREATE, &error);
+  ziparchive = zip_open(destination, ZIP_RDONLY, &error);
   if (!ziparchive)
   {
     zip_error_t ziperror;
@@ -343,7 +343,7 @@ get_archived_wals(PG_FUNCTION_ARGS)
     fctx->tupdesc = BlessTupleDesc(tupdesc);
 
     /* open ZIP archive */
-    fctx->ziparchive = zip_open(destination, ZIP_CREATE, &error);
+    fctx->ziparchive = zip_open(destination, ZIP_RDONLY, &error);
     if (!(fctx->ziparchive))
     {
       zip_error_t ziperror;
